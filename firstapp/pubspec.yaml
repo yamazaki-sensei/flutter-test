@@ -1,4 +1,7 @@
 name: firstapp
 description: A new flutter project.
+dependencies:
+  flutter:
+    sdk: flutter
 dev_dependencies:
     test: any
