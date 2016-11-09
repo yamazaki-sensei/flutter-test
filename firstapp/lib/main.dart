@@ -21,7 +21,7 @@ class MyScaffold extends StatelessWidget {
     return new Material(
         child: new Column(
             children: <Widget>[
-              new MyAppBar( title: new Text('Example title', style: new Typography(platform: defaultTargetPlatform).white.title)),
+              new MyAppBar(),
               new ScrollableList(key: new Key('Scroll'), itemExtent:30.0, children:_createWidgets(), ),
               searchButton
             ],
@@ -42,10 +42,6 @@ Iterable<Widget> _createWidgets() {
 
 class MyAppBar extends StatelessWidget {
 
-  MyAppBar({this.title});
-
-  final Widget title;
-
   @override
   Widget build(BuildContext context) {
     return new Container(
@@ -57,14 +53,6 @@ class MyAppBar extends StatelessWidget {
           new IconButton(
             icon: new Icon(Icons.menu),
             tooltip: 'Navigation menu',
-            onPressed: null,
-          ),
-          new Flexible(
-              child: title,
-          ),
-          new IconButton(
-            icon: new Icon(Icons.search),
-            tooltip: 'Search',
             onPressed: null,
           ),
         ],
