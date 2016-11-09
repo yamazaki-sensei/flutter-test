@@ -10,12 +10,16 @@ void main() {
 class MyScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var searchButton = new SearchButton();
+    searchButton.callback = (SearchButton button) {
+      print("Pressed");
+    };
     return new Material(
         child: new Column(
             children: <Widget>[
               new MyAppBar( title: new Text('Example title', style: new Typography(platform: defaultTargetPlatform).white.title)),
               new ScrollableList(key: new Key('Scroll'), itemExtent:30.0, children:_createWidgets(), ),
-              new SearchButton()
+              searchButton
             ],
           ),
         );
