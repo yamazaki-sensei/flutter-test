@@ -14,8 +14,9 @@ class MyScaffold extends StatelessWidget {
             children: <Widget>[
               new MyAppBar( title: new Text('Example title', style: new Typography(platform: defaultTargetPlatform).white.title)),
               new ScrollableList(key: new Key('Scroll'), itemExtent:30.0, children:_createWidgets(), ),
+              new DownloadButton()
             ],
-            ),
+          ),
         );
   }
 }
@@ -28,6 +29,17 @@ Iterable<Widget> _createWidgets() {
     ret.add(new Text('Hello'));
   }
   return ret;
+}
+
+class DownloadButton extends StatelessWidget {
+
+  @override build(BuildContext context) {
+    return new IconButton(
+        icon: new Icon(Icons.search),
+        tooltip: 'Search',
+        onPressed: null,
+    );
+  }
 }
 
 class MyAppBar extends StatelessWidget {
