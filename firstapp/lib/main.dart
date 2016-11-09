@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firstapp/ui/search_button';
+import 'package:firstapp/ui/search_button.dart';
+import 'package:firstapp/client/qiita_api_client.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -12,7 +13,10 @@ class MyScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     var searchButton = new SearchButton();
     searchButton.callback = (SearchButton button) {
-      print("Pressed");
+      print('start');
+      var client = new QiitaClient();
+      client.get();
+      print('end');
     };
     return new Material(
         child: new Column(

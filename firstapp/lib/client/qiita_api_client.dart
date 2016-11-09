@@ -7,7 +7,7 @@ class QiitaClient {
     client.getUrl(Uri.parse("http://www.google.co.jp")).then((HttpClientRequest request) {
       return request.close();
     }).then((HttpClientResponse response) {
-      print(response);
+      print(response.headers);
     });
   }
 }
