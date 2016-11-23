@@ -1,13 +1,23 @@
 import 'dart:io';
+import 'dart:async';
+import 'dart:convert' show UTF8, LineSplitter;
 
 
 class QiitaClient {
-  void get() {
+  Future<String> get() async {
+
+    var completer = new Completer();
+
     var client = new HttpClient();
-    client.getUrl(Uri.parse("http://www.google.co.jp")).then((HttpClientRequest request) {
-      return request.close();
-    }).then((HttpClientResponse response) {
-      print(response.headers);
-    });
+    var request = await client.getUrl(Uri.parse("http://www.google.co.jp"));
+
+    var response = await request.close();
+    var result = "";
+    await for (var contents in response.transform(UTF8.decoder).transform(const LineSplitter())) {
+      result += contents;
+      print(result);
+    }
+
+    return completer.future;
   }
 }
