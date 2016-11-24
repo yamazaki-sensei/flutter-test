@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firstapp/ui/search_button.dart';
 import 'package:firstapp/client/qiita_api_client.dart';
 import 'package:firstapp/entity/qiita_items_factory.dart';
+import 'package:firstapp/entity/qiita_item.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -9,45 +10,66 @@ void main() {
     home: new MyScaffold()
   ));
 }
-class MyScaffold extends StatelessWidget {
+
+class _QiitaItemsState extends State<MyScaffold> {
+
+  List<QiitaItem> _items;
+  ScrollableList _listView;
+  Material _view;
+
+  Key _listViewKey = new Key('ListView');
+
   @override
   Widget build(BuildContext context) {
     var searchButton = new SearchButton();
     searchButton.callback = (SearchButton button) {
-      print('start');
       var client = new QiitaClient();
       client.get().then((result) {
         _handleItemsString(result);
-        print('end');
       });
     };
-    return new Material(
+
+    _listView = new ScrollableList(key: _listViewKey, itemExtent:30.0, children:_createWidgets(_items), );
+    _view = new Material(
         child: new Column(
             children: <Widget>[
               new MyAppBar(),
-              new ScrollableList(key: new Key('Scroll'), itemExtent:30.0, children:_createWidgets(), ),
+              _listView,
               searchButton
             ],
-          ),
+            ),
         );
+
+    return _view;
   }
 
-  _handleItemsString(var jsonString) {
-    var items = QiitaItemsFactory.create(jsonString);
-    items.forEach((item) {
-      print('title = ' + item.title);
+  void _handleItemsString(var jsonString) {
+    setState(() {
+      _items = QiitaItemsFactory.create(jsonString);
     });
   }
-}
 
-Iterable<Widget> _createWidgets() {
+  Iterable<Widget> _createWidgets(List<QiitaItem> items) {
 
-  var ret = new List<Widget>();
+    var ret = new List<Widget>();
+    if(items == null) {
+      return ret;
+    }
 
-  for(var i = 0; i < 10; i++) {
-    ret.add(new Text('Hello'));
+    items.forEach((item) {
+      print(item.title);
+      ret.add(new Text(item.title));
+    });
+    return ret;
   }
-  return ret;
+
+
+}
+class MyScaffold extends StatefulWidget {
+  @override
+  _QiitaItemsState createState() {
+    return new _QiitaItemsState();
+  }
 }
 
 class MyAppBar extends StatelessWidget {
