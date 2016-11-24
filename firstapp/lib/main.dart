@@ -15,8 +15,10 @@ class MyScaffold extends StatelessWidget {
     searchButton.callback = (SearchButton button) {
       print('start');
       var client = new QiitaClient();
-      client.get();
-      print('end');
+      client.get().then((result) {
+        print('end');
+        print('result = ' + result);
+      });
     };
     return new Material(
         child: new Column(
