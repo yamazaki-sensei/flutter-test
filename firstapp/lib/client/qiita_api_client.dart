@@ -12,7 +12,7 @@ class QiitaClient {
     var completer = new Completer();
 
     var client = new HttpClient();
-    var request = await client.getUrl(Uri.parse(_api_root + "/v2/users"));
+    var request = await client.getUrl(Uri.parse(_api_root + "/v2/items"));
 
     var response = await request.close();
     var result = "";

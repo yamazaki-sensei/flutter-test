@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firstapp/ui/search_button.dart';
 import 'package:firstapp/client/qiita_api_client.dart';
+import 'package:firstapp/entity/qiita_items_factory.dart';
 
 void main() {
   runApp(new MaterialApp(
@@ -16,8 +17,8 @@ class MyScaffold extends StatelessWidget {
       print('start');
       var client = new QiitaClient();
       client.get().then((result) {
+        _handleItemsString(result);
         print('end');
-        print('result = ' + result);
       });
     };
     return new Material(
@@ -29,6 +30,13 @@ class MyScaffold extends StatelessWidget {
             ],
           ),
         );
+  }
+
+  _handleItemsString(var jsonString) {
+    var items = QiitaItemsFactory.create(jsonString);
+    items.forEach((item) {
+      print('title = ' + item.title);
+    });
   }
 }
 
