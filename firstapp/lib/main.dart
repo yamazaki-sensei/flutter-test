@@ -21,15 +21,17 @@ class _QiitaItemsState extends State<MyScaffold> {
 
   @override
   Widget build(BuildContext context) {
+    print('build');
     var searchButton = new SearchButton();
     searchButton.callback = (SearchButton button) {
+      print('search');
       var client = new QiitaClient();
       client.get().then((result) {
         _handleItemsString(result);
       });
     };
 
-    _listView = new ScrollableList(key: _listViewKey, itemExtent:30.0, children:_createWidgets(_items), );
+    _listView = new ScrollableList(key: _listViewKey, itemExtent:70.0, children:_createWidgets(_items), );
     _view = new Material(
         child: new Column(
             children: <Widget>[
@@ -45,6 +47,7 @@ class _QiitaItemsState extends State<MyScaffold> {
 
   void _handleItemsString(var jsonString) {
     setState(() {
+      print('setState');
       _items = QiitaItemsFactory.create(jsonString);
     });
   }
@@ -53,9 +56,9 @@ class _QiitaItemsState extends State<MyScaffold> {
 
     var ret = new List<Widget>();
     if(items == null) {
+      print('items is null');
       return ret;
     }
-
     items.forEach((item) {
       print(item.title);
       ret.add(new Text(item.title));
