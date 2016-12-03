@@ -7,11 +7,11 @@ import 'package:firstapp/entity/qiita_item.dart';
 void main() {
   runApp(new MaterialApp(
     title: 'My app',
-    home: new MyScaffold()
+    home: new QiitaApp()
   ));
 }
 
-class _QiitaItemsState extends State<MyScaffold> {
+class _QiitaItemsState extends State<QiitaApp> {
 
   List<QiitaItem> _items;
   ScrollableList _listView;
@@ -68,7 +68,7 @@ class _QiitaItemsState extends State<MyScaffold> {
 
 
 }
-class MyScaffold extends StatefulWidget {
+class QiitaApp extends StatefulWidget {
   @override
   _QiitaItemsState createState() {
     return new _QiitaItemsState();
@@ -80,18 +80,8 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      height: 56.0,
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      height: 55.0,
       decoration: new BoxDecoration(backgroundColor: Colors.blue[500]),
-      child: new Row(
-        children: <Widget>[
-          new IconButton(
-            icon: new Icon(Icons.menu),
-            tooltip: 'Navigation menu',
-            onPressed: null,
-          ),
-        ],
-      )
     );
   }
 }
