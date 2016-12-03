@@ -32,11 +32,12 @@ class _QiitaItemsState extends State<QiitaApp> {
     };
 
     _listView = new ScrollableList(key: _listViewKey, itemExtent:70.0, children:_createWidgets(_items), );
+    var container = new Container(height: 300.0, child: _listView);
     _view = new Material(
         child: new Column(
             children: <Widget>[
               new MyAppBar(),
-              _listView,
+              container,
               searchButton
             ],
             ),
