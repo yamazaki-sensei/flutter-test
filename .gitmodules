@@ -1,3 +1,0 @@
-[submodule "firstapp/flutter"]
-	path = firstapp/flutter
-	url = git@github.com:flutter/flutter.git
