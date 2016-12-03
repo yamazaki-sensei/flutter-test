@@ -14,8 +14,6 @@ void main() {
 class _QiitaItemsState extends State<QiitaApp> {
 
   List<QiitaItem> _items;
-  ScrollableList _listView;
-  Material _view;
 
   Key _listViewKey = new Key('ListView');
 
@@ -31,19 +29,17 @@ class _QiitaItemsState extends State<QiitaApp> {
       });
     };
 
-    _listView = new ScrollableList(key: _listViewKey, itemExtent:70.0, children:_createWidgets(_items), );
-    var container = new Container(height: 300.0, child: _listView);
-    _view = new Material(
+    var listView = new ScrollableList(key: _listViewKey, itemExtent:70.0, children:_createWidgets(_items), );
+    var container = new Container(height: 300.0, child: listView);
+    return new Material(
         child: new Column(
             children: <Widget>[
               new MyAppBar(),
               container,
               searchButton
             ],
-            ),
+          ),
         );
-
-    return _view;
   }
 
   void _handleItemsString(var jsonString) {
@@ -66,9 +62,8 @@ class _QiitaItemsState extends State<QiitaApp> {
     });
     return ret;
   }
-
-
 }
+
 class QiitaApp extends StatefulWidget {
   @override
   _QiitaItemsState createState() {
